@@ -1,0 +1,97 @@
+<!DOCTYPE HTML><html lang=en class="sidebar-visible no-js light"><head><meta charset=UTF-8><title>PCRE2 - Command line text processing with Rust tools</title><meta content="text/html; charset=utf-8"http-equiv=Content-Type><meta name=description content="Command line text processing with Rust tools"><meta name=viewport content="width=device-width, initial-scale=1"><meta name=theme-color content=#ffffff><link rel=icon href=../favicon.svg><link rel="shortcut icon"href=../favicon.png><link rel=stylesheet href=../css/variables.css><link rel=stylesheet href=../css/general.css><link rel=stylesheet href=../css/chrome.css><link rel=stylesheet href=../FontAwesome/css/font-awesome.css><link rel=stylesheet href=../fonts/fonts.css><link rel=stylesheet href=../highlight.css><link rel=stylesheet href=../tomorrow-night.css><link rel=stylesheet href=../ayu-highlight.css><link rel=stylesheet href=../style.css><body><script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script><script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script><script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script><script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script><nav id=sidebar class=sidebar aria-label="Table of contents"><div class=sidebar-scrollbox><ol class=chapter><li class="chapter-item expanded affix"><a href=../preface.html>Preface</a><li class="chapter-item expanded"><a href=../rust-regex.html><strong aria-hidden=true>1.</strong> Rust Regex</a><li class="chapter-item expanded"><a href=../hck.html><strong aria-hidden=true>2.</strong> hck</a><li class="chapter-item expanded"><a href=../sd.html><strong aria-hidden=true>3.</strong> sd</a><li class="chapter-item expanded"><a href=../ripgrep/ripgrep.html><strong aria-hidden=true>4.</strong> ripgrep</a><li><ol class=section><li class="chapter-item expanded"><a href=../ripgrep/options.html><strong aria-hidden=true>4.1.</strong> Options</a><li class="chapter-item expanded"><a href=../ripgrep/pcre2.html class=active><strong aria-hidden=true>4.2.</strong> PCRE2</a><li class="chapter-item expanded"><a href=../ripgrep/multiple-files.html><strong aria-hidden=true>4.3.</strong> Multiple Files</a></ol><li class="chapter-item expanded"><a href=../frawk/frawk.html><strong aria-hidden=true>5.</strong> frawk</a></li><br><hr><li class="chapter-item expanded"><i id=git-repository-button class="fa fa-github"></i><a href=https://github.com/learnbyexample/cli_text_processing_rust>   Source code</a><li class="chapter-item expanded"><i id=home-button class="fa fa-home"></i><a href=https://learnbyexample.github.io/>   My Blog</a><li class="chapter-item expanded"><i id=book-button class="fa fa-book"></i><a href=https://learnbyexample.github.io/books/>   My Books</a></ol></div><div id=sidebar-resize-handle class=sidebar-resize-handle></div></nav><div id=page-wrapper class=page-wrapper><div class=page><div id=menu-bar-hover-placeholder></div><div id=menu-bar class="menu-bar sticky bordered"><div class=left-buttons><button id=sidebar-toggle class=icon-button type=button title="Toggle Table of Contents"aria-label="Toggle Table of Contents"aria-controls=sidebar><i class="fa fa-bars"></i></button><button id=theme-toggle class=icon-button type=button title="Change theme"aria-label="Change theme"aria-haspopup=true aria-expanded=false aria-controls=theme-list><i class="fa fa-paint-brush"></i></button><ul id=theme-list class=theme-popup aria-label=Themes role=menu><li role=none><button role=menuitem class=theme id=light>Light (default)</button><li role=none><button role=menuitem class=theme id=rust>Rust</button><li role=none><button role=menuitem class=theme id=coal>Coal</button><li role=none><button role=menuitem class=theme id=navy>Navy</button><li role=none><button role=menuitem class=theme id=ayu>Ayu</button></ul><button id=search-toggle class=icon-button type=button title="Search. (Shortkey: s)"aria-label="Toggle Searchbar"aria-expanded=false aria-keyshortcuts=S aria-controls=searchbar><i class="fa fa-search"></i></button></div><h1 class=menu-title>Command line text processing with Rust tools</h1><div class=right-buttons><a href=https://learnbyexample.github.io title=Blog aria-label=Blog> <i id=home-button class="fa fa-home"></i> </a><a href=https://github.com/learnbyexample/cli_text_processing_rust title="Git repository"aria-label="Git repository"> <i id=git-repository-button class="fa fa-github"></i> </a></div></div><div id=search-wrapper class=hidden><form id=searchbar-outer class=searchbar-outer><input type=search id=searchbar name=searchbar placeholder="Search this book ..."aria-controls=searchresults-outer aria-describedby=searchresults-header></form><div id=searchresults-outer class="searchresults-outer hidden"><div id=searchresults-header class=searchresults-header></div><ul id=searchresults></ul></div></div><script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script><div id=content class=content><main><div class=sidetoc><nav class=pagetoc></nav></div><p><br><br><p><img src=../images/warning.svg alt=warning> <img src=../images/warning.svg alt=warning> <img src=../images/warning.svg alt=warning> This is a <strong>work-in-progress</strong> draft version.<p><br><br><h1 id=pcre2><a class=header href=#pcre2>PCRE2</a></h1><p>Use <code>-P</code> option to enable Perl Compatible Regular Expressions 2 (PCRE2) instead of default Rust regex. PCRE2 is mostly similar, but not exactly same as regular expressions present in Perl programming language. The main feature difference between PCRE and PCRE2 is substitution.<p>This chapter will only show a few examples. For complete documentation and other information, see <a href=https://www.pcre.org/current/doc/html/index.html>pcre: current doc</a>.<h2 id=difference-between-gnu-grep-and-ripgrep><a class=header href=#difference-between-gnu-grep-and-ripgrep>Difference between GNU grep and ripgrep</a></h2><p>Most of the features covered by <code>grep -P</code> will work exactly the same with <code>rg -P</code> as well. There could be differences with regards to how certain things are handled between <code>GNU grep</code> and <code>ripgrep</code> — for example, <code>-f</code> and <code>-e</code> options, empty matches, etc.<pre><code class=language-bash>$ # empty match handling
+$ echo '1a42z' | grep -oP '[a-z]*'
+a
+z
+$ echo '1a42z' | rg -oP '[a-z]*'
+
+a
+
+z
+
+$ cat five_words.txt 
+sequoia
+subtle
+questionable
+exhibit
+equation
+$ printf 'sub\nbit' | grep -P -f- five_words.txt
+grep: the -P option only supports a single pattern
+$ printf 'sub\nbit' | rg -P -f- five_words.txt
+2:subtle
+4:exhibit
+</code></pre><h2 id=lookarounds><a class=header href=#lookarounds>Lookarounds</a></h2><p>Examples for lookarounds and <code>\K</code>.<pre><code class=language-bash>$ rg -P '(?=.*a)(?=.*e)(?=.*i)(?=.*o).*u' five_words.txt
+1:sequoia
+3:questionable
+5:equation
+
+$ echo 'hey food! foo42 foot5 foofoo' | rg -P 'foo(?!\d)' -r 'X'
+hey Xd! foo42 Xt5 XX
+
+$ # match if 'go' is not there between 'at' and 'par'
+$ echo 'fox,cat,dog,parrot' | rg -qP 'at((?!go).)*par' && echo 'Match'
+Match
+
+$ # same as: rg -o '^(?:.*?cat.*?){2}(cat[a-z]*)' -r '$1'
+$ s='scatter cat cater scat concatenate abdicate'
+$ echo "$s" | rg -oP '^(.*?cat.*?){2}\Kcat[a-z]*'
+cater
+</code></pre><h2 id=backreference-within-regex-definition><a class=header href=#backreference-within-regex-definition>Backreference within regex definition</a></h2><pre><code class=language-bash>$ # remove any number of consecutive duplicate words separated by space
+$ echo 'aa a a a 42 f_1 f_1 f_13.14' | rg -P '\b(\w+)( \1)+\b' -r '$1'
+aa a 42 f_1 f_13.14
+</code></pre><h2 id=mixing-regex-and-literal-matching><a class=header href=#mixing-regex-and-literal-matching>Mixing regex and literal matching</a></h2><pre><code class=language-bash>$ expr='(a^b)'
+$ echo 'f*(2-a/b) - 3*(a^b)-42' | rg -oP '\S*\Q'"$expr"'\E\S*'
+3*(a^b)-42
+</code></pre><h2 id=automatically-switch-to-pcre2><a class=header href=#automatically-switch-to-pcre2>Automatically switch to PCRE2</a></h2><p>If you wish to use Rust regex normally and switch to PCRE2 when needed, use the <code>--engine=auto</code> option.<pre><code class=language-bash>$ # using a feature not present normally
+$ echo 'car bat cod map' | rg -o '\b(bat|map)\b(*SKIP)(*F)|\w+'
+regex parse error:
+    \b(bat|map)\b(*SKIP)(*F)|\w+
+                  ^
+error: repetition operator missing expression
+
+$ # automatically switch to PCRE2
+$ echo 'car bat cod map' | rg -o --engine=auto '\b(bat|map)\b(*SKIP)(*F)|\w+'
+car
+cod
+</code></pre><blockquote><p><img src=../images/info.svg alt=info> See my blog post <a href=https://learnbyexample.github.io/substitution-with-ripgrep/>Search and replace tricks with ripgrep</a> for more examples.</blockquote></main><nav class=nav-wrapper aria-label="Page navigation"><a rel=prev href=../ripgrep/options.html class="mobile-nav-chapters previous"title="Previous chapter"aria-label="Previous chapter"aria-keyshortcuts=Left> <i class="fa fa-angle-left"></i> </a><a rel=next href=../ripgrep/multiple-files.html class="mobile-nav-chapters next"title="Next chapter"aria-label="Next chapter"aria-keyshortcuts=Right> <i class="fa fa-angle-right"></i> </a><div style="clear: both"></div></nav></div></div><nav class=nav-wide-wrapper aria-label="Page navigation"><a rel=prev href=../ripgrep/options.html class="nav-chapters previous"title="Previous chapter"aria-label="Previous chapter"aria-keyshortcuts=Left> <i class="fa fa-angle-left"></i> </a><a rel=next href=../ripgrep/multiple-files.html class="nav-chapters next"title="Next chapter"aria-label="Next chapter"aria-keyshortcuts=Right> <i class="fa fa-angle-right"></i> </a></nav></div><script>
+            window.playground_copyable = true;
+        </script><script src=../elasticlunr.min.js charset=utf-8></script><script src=../mark.min.js charset=utf-8></script><script src=../searcher.js charset=utf-8></script><script src=../clipboard.min.js charset=utf-8></script><script src=../highlight.js charset=utf-8></script><script src=../book.js charset=utf-8></script><script src=../sidebar.js></script>

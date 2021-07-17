@@ -1,0 +1,170 @@
+<!DOCTYPE HTML><html lang=en class="sidebar-visible no-js light"><head><meta charset=UTF-8><title>Multiple Files - Command line text processing with Rust tools</title><meta content="text/html; charset=utf-8"http-equiv=Content-Type><meta name=description content="Command line text processing with Rust tools"><meta name=viewport content="width=device-width, initial-scale=1"><meta name=theme-color content=#ffffff><link rel=icon href=../favicon.svg><link rel="shortcut icon"href=../favicon.png><link rel=stylesheet href=../css/variables.css><link rel=stylesheet href=../css/general.css><link rel=stylesheet href=../css/chrome.css><link rel=stylesheet href=../FontAwesome/css/font-awesome.css><link rel=stylesheet href=../fonts/fonts.css><link rel=stylesheet href=../highlight.css><link rel=stylesheet href=../tomorrow-night.css><link rel=stylesheet href=../ayu-highlight.css><link rel=stylesheet href=../style.css><body><script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script><script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script><script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script><script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script><nav id=sidebar class=sidebar aria-label="Table of contents"><div class=sidebar-scrollbox><ol class=chapter><li class="chapter-item expanded affix"><a href=../preface.html>Preface</a><li class="chapter-item expanded"><a href=../rust-regex.html><strong aria-hidden=true>1.</strong> Rust Regex</a><li class="chapter-item expanded"><a href=../hck.html><strong aria-hidden=true>2.</strong> hck</a><li class="chapter-item expanded"><a href=../sd.html><strong aria-hidden=true>3.</strong> sd</a><li class="chapter-item expanded"><a href=../ripgrep/ripgrep.html><strong aria-hidden=true>4.</strong> ripgrep</a><li><ol class=section><li class="chapter-item expanded"><a href=../ripgrep/options.html><strong aria-hidden=true>4.1.</strong> Options</a><li class="chapter-item expanded"><a href=../ripgrep/pcre2.html><strong aria-hidden=true>4.2.</strong> PCRE2</a><li class="chapter-item expanded"><a href=../ripgrep/multiple-files.html class=active><strong aria-hidden=true>4.3.</strong> Multiple Files</a></ol><li class="chapter-item expanded"><a href=../frawk/frawk.html><strong aria-hidden=true>5.</strong> frawk</a></li><br><hr><li class="chapter-item expanded"><i id=git-repository-button class="fa fa-github"></i><a href=https://github.com/learnbyexample/cli_text_processing_rust>   Source code</a><li class="chapter-item expanded"><i id=home-button class="fa fa-home"></i><a href=https://learnbyexample.github.io/>   My Blog</a><li class="chapter-item expanded"><i id=book-button class="fa fa-book"></i><a href=https://learnbyexample.github.io/books/>   My Books</a></ol></div><div id=sidebar-resize-handle class=sidebar-resize-handle></div></nav><div id=page-wrapper class=page-wrapper><div class=page><div id=menu-bar-hover-placeholder></div><div id=menu-bar class="menu-bar sticky bordered"><div class=left-buttons><button id=sidebar-toggle class=icon-button type=button title="Toggle Table of Contents"aria-label="Toggle Table of Contents"aria-controls=sidebar><i class="fa fa-bars"></i></button><button id=theme-toggle class=icon-button type=button title="Change theme"aria-label="Change theme"aria-haspopup=true aria-expanded=false aria-controls=theme-list><i class="fa fa-paint-brush"></i></button><ul id=theme-list class=theme-popup aria-label=Themes role=menu><li role=none><button role=menuitem class=theme id=light>Light (default)</button><li role=none><button role=menuitem class=theme id=rust>Rust</button><li role=none><button role=menuitem class=theme id=coal>Coal</button><li role=none><button role=menuitem class=theme id=navy>Navy</button><li role=none><button role=menuitem class=theme id=ayu>Ayu</button></ul><button id=search-toggle class=icon-button type=button title="Search. (Shortkey: s)"aria-label="Toggle Searchbar"aria-expanded=false aria-keyshortcuts=S aria-controls=searchbar><i class="fa fa-search"></i></button></div><h1 class=menu-title>Command line text processing with Rust tools</h1><div class=right-buttons><a href=https://learnbyexample.github.io title=Blog aria-label=Blog> <i id=home-button class="fa fa-home"></i> </a><a href=https://github.com/learnbyexample/cli_text_processing_rust title="Git repository"aria-label="Git repository"> <i id=git-repository-button class="fa fa-github"></i> </a></div></div><div id=search-wrapper class=hidden><form id=searchbar-outer class=searchbar-outer><input type=search id=searchbar name=searchbar placeholder="Search this book ..."aria-controls=searchresults-outer aria-describedby=searchresults-header></form><div id=searchresults-outer class="searchresults-outer hidden"><div id=searchresults-header class=searchresults-header></div><ul id=searchresults></ul></div></div><script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script><div id=content class=content><main><div class=sidetoc><nav class=pagetoc></nav></div><p><br><br><p><img src=../images/warning.svg alt=warning> <img src=../images/warning.svg alt=warning> <img src=../images/warning.svg alt=warning> This is a <strong>work-in-progress</strong> draft version.<p><br><br><h1 id=recursive-options><a class=header href=#recursive-options>Recursive options</a></h1><p>This chapter will cover the feature most attractive for users — the default recursive behavior and options to customize it. For beginners to recursive search using <code>rg</code>, the <code>--files</code> option to get list of files being searched can be useful. The <code>--debug</code> and <code>--trace</code> options could be used for further analysis, especially to know why a file is ignored. The <code>--files</code> option is also handy if you want to use features of <code>rg</code> in pruning filenames for further processing instead of glob match, <code>find</code> command, etc.<h2 id=test-directory><a class=header href=#test-directory>Test directory</a></h2><p>First, create a directory with multiple sub-directories, hidden files, etc.<pre><code class=language-bash>$ cp /usr/share/dict/words words.txt
+$ # 'context_matching' directory has 'context.txt' shown in Options chapter
+
+$ # create directory for this section and cd into it
+$ mkdir recursive_matching && cd $_
+
+$ # create some files
+$ printf 'hide\nobscure\nconceal\ncover\nblot\nshield' > patterns.txt
+$ grep -Ff patterns.txt ../words.txt > .hidden
+$ grep -E '([as]([b-g]|po)[r-t]){2}' ../words.txt > nested_group.txt
+$ echo 'how are you?' > normal.txt
+$ echo 'how dare you!' > 'filename with spaces.txt'
+
+$ # create sub-directory, two scripts and another hidden file
+$ mkdir scripts
+$ echo 'yrneaolrknzcyr 86960' > scripts/.key
+$ echo "tr 'a-z0-9' 'n-za-m5-90-4' < .key" > scripts/decode.sh
+$ printf "import math\n\nprint(math.pi)\n" > scripts/pi.py
+
+$ # create link to a directory
+$ ln -s ../context_matching/
+
+$ tree -al
+.
+├── context_matching -> ../context_matching/
+│   └── context.txt
+├── filename with spaces.txt
+├── .hidden
+├── nested_group.txt
+├── normal.txt
+├── patterns.txt
+└── scripts
+    ├── decode.sh
+    ├── .key
+    └── pi.py
+
+2 directories, 9 files
+</code></pre><h2 id=default-recursive-behavior><a class=header href=#default-recursive-behavior>Default recursive behavior</a></h2><pre><code class=language-bash>$ # assumes 'recursive_matching' as CWD
+$ rg --files
+patterns.txt
+scripts/pi.py
+scripts/decode.sh
+nested_group.txt
+normal.txt
+filename with spaces.txt
+</code></pre><p>As seen from the example above, some of the files seem missing. That is because <code>rg</code> performs recursive search with certain pre-set conditions:<ul><li>ignore files and directories that match rules specified by ignore files like <code>.gitignore</code><li>ignore hidden files and directories<li>ignore binary files (files containing ASCII NUL character) — but displays the match if found before encountering NUL character along with a warning<li>ignore symbolic links</ul><h2 id=effect-of-ignore-files><a class=header href=#effect-of-ignore-files>Effect of ignore files</a></h2><p>Here's an example to show <code>.gitignore</code> in action. The presence of <code>.git</code> directory (either in current directory or in parent directories) would mark <code>.gitignore</code> to be used for ignoring. Recently, <code>--no-require-git</code> flag was added to avoid the need for empty <code>.git</code> directory. For illustration purposes, empty <code>.git</code> would be created here instead of using an actual <code>git</code> project. In addition to <code>.gitignore</code>, the <code>rg</code> command also uses filenames like <code>.ignore</code> and <code>.rgignore</code> for determining files to ignore. For complete details and various ignore options, refer to manual as well as <a href=https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md>ripgrep: user guide</a>.<blockquote><p><img src=../images/info.svg alt=info> See <a href=https://stackoverflow.com/q/8527597/4082052>stackoverflow: .gitignore pattern format</a> to learn about the various rules.</blockquote><pre><code class=language-bash>$ mkdir .git
+$ echo 'patterns.txt' > .gitignore
+$ rg -wl 'obscure|are'
+normal.txt
+
+$ # --no-ignore option will disable pruning based on ignore files
+$ rg --no-ignore -wl 'obscure|are'
+patterns.txt
+normal.txt
+</code></pre><h2 id=overriding-default-recursive-behavior><a class=header href=#overriding-default-recursive-behavior>Overriding default recursive behavior</a></h2><p>Use the <code>--hidden</code> option to search hidden files and directories as well.<pre><code class=language-bash>$ # create normal file in a hidden directory
+$ cp patterns.txt .git/pat.txt
+$ # no output, and patterns.txt isn't matched because of .gitignore
+$ rg -l 'obscure|ne'
+
+$ rg --hidden -l 'obscure|ne'
+scripts/.key
+.git/pat.txt
+.hidden
+</code></pre><p>As a shortcut, you can use<ul><li><code>-u</code> to indicate <code>--no-ignore</code><li><code>-uu</code> to indicate <code>--no-ignore --hidden</code><li><code>-uuu</code> to indicate <code>--no-ignore --hidden --binary</code></ul><p>Use <code>-L</code> option to follow symbolic links.<pre><code class=language-bash>$ rg 'red'
+$ rg -Ll 'red'
+context_matching/context.txt
+</code></pre><h2 id=search-based-on-filename-extension><a class=header href=#search-based-on-filename-extension>Search based on filename extension</a></h2><p>The <code>-t</code> option provides a handy way to search files based on their extension. Use <code>rg --type-list</code> to see all available types and their glob patterns. Use <code>-T</code> to invert the selection.<pre><code class=language-bash>$ rg --type-list | rg 'markdown'
+markdown: *.markdown, *.md, *.mdown, *.mkdn
+md: *.markdown, *.md, *.mdown, *.mkdn
+
+$ # use rg --type-list | rg '^sh:' to see glob pattern for 'sh'
+$ rg -t=py -t=sh --files
+scripts/pi.py
+scripts/decode.sh
+
+$ # note that .gitignore is active
+$ rg -t=txt --files
+nested_group.txt
+normal.txt
+filename with spaces.txt
+
+$ rg -T=txt --files
+scripts/pi.py
+scripts/decode.sh
+</code></pre><h2 id=search-based-on-glob-pattern><a class=header href=#search-based-on-glob-pattern>Search based on glob pattern</a></h2><p>Use <code>-g</code> option to search only files matching the given glob pattern. Prefix <code>!</code> to exclude the matches. If <code>/</code> is not used, the glob will be matched against basename of all the files found recursively.<pre><code class=language-bash>$ rg -g='*.{sh,py}' --files
+scripts/pi.py
+scripts/decode.sh
+
+$ rg -g='*gr*' --files
+nested_group.txt
+
+$ # exclude filenames ending with py
+$ rg -g='!*.py' --files
+scripts/decode.sh
+nested_group.txt
+normal.txt
+filename with spaces.txt
+$ # exclude scripts directory
+$ rg -g='!scripts' --files
+nested_group.txt
+normal.txt
+filename with spaces.txt
+</code></pre><p>You can use <code>**</code> while constructing the glob pattern as a placeholder for zero or more levels of directories. See <a href=https://git-scm.com/docs/gitignore#_pattern_format>git documentation: gitignore pattern format</a> for more details.<pre><code class=language-bash>$ # create files/directories
+$ mkdir double_star && cd $_
+$ mkdir -p one/two/{x,y,z}/four
+$ touch one/1.txt one/two/y/why.txt one/two/x/ex.txt one/two/y/four/4.txt
+
+$ # all files
+$ rg --files
+one/1.txt
+one/two/x/ex.txt
+one/two/y/four/4.txt
+one/two/y/why.txt
+
+$ # file paths starting with 'one/two/'
+$ rg -g='one/two/**' --files
+one/two/x/ex.txt
+one/two/y/four/4.txt
+one/two/y/why.txt
+
+$ # file paths having the directory 'y' anywhere in the path
+$ rg -g='**/y/**' --files
+one/two/y/four/4.txt
+one/two/y/why.txt
+
+$ # clean up temporary directory
+$ cd .. && rm -r double_star
+</code></pre><blockquote><p><img src=../images/info.svg alt=info> There are many more options to customize the search experience (for ex: defining your own type using <code>--type-add</code> option, <code>--max-depth</code> to control depth of traversal, etc). See <a href=https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file>ripgrep user guide: configuration</a> for examples and details on how to maintain them in a file.</blockquote></main><nav class=nav-wrapper aria-label="Page navigation"><a rel=prev href=../ripgrep/pcre2.html class="mobile-nav-chapters previous"title="Previous chapter"aria-label="Previous chapter"aria-keyshortcuts=Left> <i class="fa fa-angle-left"></i> </a><a rel=next href=../frawk/frawk.html class="mobile-nav-chapters next"title="Next chapter"aria-label="Next chapter"aria-keyshortcuts=Right> <i class="fa fa-angle-right"></i> </a><div style="clear: both"></div></nav></div></div><nav class=nav-wide-wrapper aria-label="Page navigation"><a rel=prev href=../ripgrep/pcre2.html class="nav-chapters previous"title="Previous chapter"aria-label="Previous chapter"aria-keyshortcuts=Left> <i class="fa fa-angle-left"></i> </a><a rel=next href=../frawk/frawk.html class="nav-chapters next"title="Next chapter"aria-label="Next chapter"aria-keyshortcuts=Right> <i class="fa fa-angle-right"></i> </a></nav></div><script>
+            window.playground_copyable = true;
+        </script><script src=../elasticlunr.min.js charset=utf-8></script><script src=../mark.min.js charset=utf-8></script><script src=../searcher.js charset=utf-8></script><script src=../clipboard.min.js charset=utf-8></script><script src=../highlight.js charset=utf-8></script><script src=../book.js charset=utf-8></script><script src=../sidebar.js></script>
