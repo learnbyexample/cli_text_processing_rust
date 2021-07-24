@@ -1,0 +1,113 @@
+<!DOCTYPE HTML><html lang=en class="sidebar-visible no-js light"><head><meta charset=UTF-8><title>zet - Command line text processing with Rust tools</title><meta content="text/html; charset=utf-8"http-equiv=Content-Type><meta name=description content="Command line text processing with Rust tools"><meta name=viewport content="width=device-width, initial-scale=1"><meta name=theme-color content=#ffffff><link rel=icon href=favicon.svg><link rel="shortcut icon"href=favicon.png><link rel=stylesheet href=css/variables.css><link rel=stylesheet href=css/general.css><link rel=stylesheet href=css/chrome.css><link rel=stylesheet href=FontAwesome/css/font-awesome.css><link rel=stylesheet href=fonts/fonts.css><link rel=stylesheet href=highlight.css><link rel=stylesheet href=tomorrow-night.css><link rel=stylesheet href=ayu-highlight.css><link rel=stylesheet href=style.css><body><script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script><script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script><script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script><script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script><nav id=sidebar class=sidebar aria-label="Table of contents"><div class=sidebar-scrollbox><ol class=chapter><li class="chapter-item expanded affix"><a href=preface.html>Preface</a><li class="chapter-item expanded"><a href=rust-regex.html><strong aria-hidden=true>1.</strong> Rust Regex</a><li class="chapter-item expanded"><a href=hck.html><strong aria-hidden=true>2.</strong> hck</a><li class="chapter-item expanded"><a href=sd.html><strong aria-hidden=true>3.</strong> sd</a><li class="chapter-item expanded"><a href=ripgrep/ripgrep.html><strong aria-hidden=true>4.</strong> ripgrep</a><li><ol class=section><li class="chapter-item expanded"><a href=ripgrep/options.html><strong aria-hidden=true>4.1.</strong> Options</a><li class="chapter-item expanded"><a href=ripgrep/pcre2.html><strong aria-hidden=true>4.2.</strong> PCRE2</a><li class="chapter-item expanded"><a href=ripgrep/multiple-files.html><strong aria-hidden=true>4.3.</strong> Multiple Files</a></ol><li class="chapter-item expanded"><a href=frawk/frawk.html><strong aria-hidden=true>5.</strong> frawk</a><li class="chapter-item expanded"><a href=huniq.html><strong aria-hidden=true>6.</strong> huniq</a><li class="chapter-item expanded"><a href=zet.html class=active><strong aria-hidden=true>7.</strong> zet</a></li><br><hr><li class="chapter-item expanded"><i id=git-repository-button class="fa fa-github"></i><a href=https://github.com/learnbyexample/cli_text_processing_rust>   Source code</a><li class="chapter-item expanded"><i id=home-button class="fa fa-home"></i><a href=https://learnbyexample.github.io/>   My Blog</a><li class="chapter-item expanded"><i id=book-button class="fa fa-book"></i><a href=https://learnbyexample.github.io/books/>   My Books</a></ol></div><div id=sidebar-resize-handle class=sidebar-resize-handle></div></nav><div id=page-wrapper class=page-wrapper><div class=page><div id=menu-bar-hover-placeholder></div><div id=menu-bar class="menu-bar sticky bordered"><div class=left-buttons><button id=sidebar-toggle class=icon-button type=button title="Toggle Table of Contents"aria-label="Toggle Table of Contents"aria-controls=sidebar><i class="fa fa-bars"></i></button><button id=theme-toggle class=icon-button type=button title="Change theme"aria-label="Change theme"aria-haspopup=true aria-expanded=false aria-controls=theme-list><i class="fa fa-paint-brush"></i></button><ul id=theme-list class=theme-popup aria-label=Themes role=menu><li role=none><button role=menuitem class=theme id=light>Light (default)</button><li role=none><button role=menuitem class=theme id=rust>Rust</button><li role=none><button role=menuitem class=theme id=coal>Coal</button><li role=none><button role=menuitem class=theme id=navy>Navy</button><li role=none><button role=menuitem class=theme id=ayu>Ayu</button></ul><button id=search-toggle class=icon-button type=button title="Search. (Shortkey: s)"aria-label="Toggle Searchbar"aria-expanded=false aria-keyshortcuts=S aria-controls=searchbar><i class="fa fa-search"></i></button></div><h1 class=menu-title>Command line text processing with Rust tools</h1><div class=right-buttons><a href=https://learnbyexample.github.io title=Blog aria-label=Blog> <i id=home-button class="fa fa-home"></i> </a><a href=https://github.com/learnbyexample/cli_text_processing_rust title="Git repository"aria-label="Git repository"> <i id=git-repository-button class="fa fa-github"></i> </a></div></div><div id=search-wrapper class=hidden><form id=searchbar-outer class=searchbar-outer><input type=search id=searchbar name=searchbar placeholder="Search this book ..."aria-controls=searchresults-outer aria-describedby=searchresults-header></form><div id=searchresults-outer class="searchresults-outer hidden"><div id=searchresults-header class=searchresults-header></div><ul id=searchresults></ul></div></div><script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script><div id=content class=content><main><div class=sidetoc><nav class=pagetoc></nav></div><p><br><br><p><img src=./images/warning.svg alt=warning> <img src=./images/warning.svg alt=warning> <img src=./images/warning.svg alt=warning> This is a <strong>work-in-progress</strong> draft version.<p><br><br><h1 id=zet><a class=header href=#zet>zet</a></h1><p>From <a href=https://github.com/yarrow/zet>github: zet</a>:<blockquote><p>This is a command-line utility for doing set operations on files considered as sets of lines. For instance, <code>zet union x y z</code> outputs the lines that occur in any of <code>x</code>, <code>y</code>, or <code>z</code>, and <code>zet intersect x y z</code> those that occur in all of them.</blockquote><blockquote><p><img src=./images/warning.svg alt=warning> Zet reads entire files into memory. Its memory usage is roughly proportional to the file size of its largest argument plus the size of the (eventual) output.</blockquote><h2 id=installation><a class=header href=#installation>Installation</a></h2><p>See <a href=https://github.com/yarrow/zet/releases>zet: releases</a> for details.<h2 id=commands-and-documentation><a class=header href=#commands-and-documentation>Commands and documentation</a></h2><p>From <code>zet --help</code>:<pre><code class=language-nohighlight>Each operation prints lines meeting a different condition:
+    Operation  Prints lines appearing in
+    ========== =========================
+    intersect: EVERY file
+    union:     ANY file
+    diff:      the FIRST file, and no other
+    single:    exactly ONE file
+    multiple:  MORE THAN one file
+</code></pre><blockquote><p>Each line is output at most once, no matter how many times it occurs in the file(s). Lines are not sorted, but are printed in the order they occur in the input.</blockquote><h2 id=removing-duplicates><a class=header href=#removing-duplicates>Removing duplicates</a></h2><p>Sample input files:<pre><code class=language-bash>$ cat color_list1.txt
+teal
+light blue
+yellow
+green
+
+$ cat color_list2.txt
+light blue
+black
+dark green
+yellow
+</code></pre><p>Applying <code>union</code> will preserve only the first copy of duplicate lines. This will work even with single input file.<pre><code class=language-bash>$ zet union color_list1.txt color_list2.txt
+teal
+light blue
+yellow
+green
+black
+dark green
+
+$ zet union <(printf 'car\nbike\ncar\n')
+car
+bike
+</code></pre><h2 id=finding-common-lines><a class=header href=#finding-common-lines>Finding common lines</a></h2><p>The <code>intersect</code> command will give lines that are present in all of the input files.<pre><code class=language-bash>$ zet intersect color_list1.txt color_list2.txt
+light blue
+yellow
+
+$ zet intersect color_list1.txt color_list2.txt <(printf 'red\nyellow')
+yellow
+</code></pre><h2 id=lines-not-present-in-other-files><a class=header href=#lines-not-present-in-other-files>Lines not present in other files</a></h2><p>When you apply <code>diff</code>, lines from the first file argument will be displayed in the output only if it is <em>not</em> found in any of the other file arguments.<pre><code class=language-bash>$ zet diff color_list1.txt color_list2.txt
+teal
+green
+
+$ zet diff color_list2.txt color_list1.txt
+black
+dark green
+
+$ zet diff color_list2.txt color_list1.txt <(echo 'black')
+dark green
+</code></pre><h2 id=lines-present-only-once><a class=header href=#lines-present-only-once>Lines present only once</a></h2><p>To get lines that are present only in one of the file arguments, use the <code>single</code> argument. Duplicates present in only one of the files will still be displayed once in the output.<pre><code class=language-bash># 'car' occurs multiple times, but only in one of the files
+# 'yellow' is present in more than one files, so not part of the output
+$ zet single color_list1.txt color_list2.txt <(printf 'car\nbike\ncar\n')
+teal
+green
+black
+dark green
+car
+bike
+</code></pre><h2 id=lines-present-in-two-or-more-files><a class=header href=#lines-present-in-two-or-more-files>Lines present in two or more files</a></h2><p>The <code>intersect</code> command gives lines that are common to all the file arguments. If you want lines that are present in at least two of the files, use the <code>multiple</code> command instead.<pre><code class=language-bash>$ zet intersect color_list1.txt color_list2.txt <(printf 'red\nyellow')
+yellow
+$ zet multiple color_list1.txt color_list2.txt <(printf 'red\nyellow')
+light blue
+yellow
+</code></pre><h2 id=speed-comparison><a class=header href=#speed-comparison>Speed comparison</a></h2><ul><li>Case 1: shorter file passed as the first argument</ul><pre><code class=language-bash>$ time frawk 'NR==FNR{a[$0]; next} $0 in a' words.txt SCOWL-wl.txt > f1
+real    0m0.091s
+
+$ time zet intersect words.txt SCOWL-wl.txt > f2
+real    0m0.104s
+</code></pre><ul><li>Case 2: longer file passed as the first argument</ul><pre><code class=language-bash>$ time frawk 'NR==FNR{a[$0]; next} $0 in a' SCOWL-wl.txt words.txt > f1
+real    0m0.204s
+
+$ time zet intersect SCOWL-wl.txt words.txt > f2
+real    0m0.118s
+</code></pre></main><nav class=nav-wrapper aria-label="Page navigation"><a rel=prev href=huniq.html class="mobile-nav-chapters previous"title="Previous chapter"aria-label="Previous chapter"aria-keyshortcuts=Left> <i class="fa fa-angle-left"></i> </a><div style="clear: both"></div></nav></div></div><nav class=nav-wide-wrapper aria-label="Page navigation"><a rel=prev href=huniq.html class="nav-chapters previous"title="Previous chapter"aria-label="Previous chapter"aria-keyshortcuts=Left> <i class="fa fa-angle-left"></i> </a></nav></div><script>
+            window.playground_copyable = true;
+        </script><script src=elasticlunr.min.js charset=utf-8></script><script src=mark.min.js charset=utf-8></script><script src=searcher.js charset=utf-8></script><script src=clipboard.min.js charset=utf-8></script><script src=highlight.js charset=utf-8></script><script src=book.js charset=utf-8></script><script src=sidebar.js></script>
