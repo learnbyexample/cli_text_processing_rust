@@ -1,0 +1,112 @@
+<!DOCTYPE HTML><html lang=en class="sidebar-visible no-js light"><head><meta charset=UTF-8><title>xsv - Command line text processing with Rust tools</title><meta content="text/html; charset=utf-8"http-equiv=Content-Type><meta name=description content="Command line text processing with Rust tools"><meta name=viewport content="width=device-width, initial-scale=1"><meta name=theme-color content=#ffffff><link rel=icon href=favicon.svg><link rel="shortcut icon"href=favicon.png><link rel=stylesheet href=css/variables.css><link rel=stylesheet href=css/general.css><link rel=stylesheet href=css/chrome.css><link rel=stylesheet href=FontAwesome/css/font-awesome.css><link rel=stylesheet href=fonts/fonts.css><link rel=stylesheet href=highlight.css><link rel=stylesheet href=tomorrow-night.css><link rel=stylesheet href=ayu-highlight.css><link rel=stylesheet href=style.css><body><script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script><script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script><script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script><script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script><nav id=sidebar class=sidebar aria-label="Table of contents"><div class=sidebar-scrollbox><ol class=chapter><li class="chapter-item expanded affix"><a href=preface.html>Preface</a><li class="chapter-item expanded"><a href=rust-regex.html><strong aria-hidden=true>1.</strong> Rust Regex</a><li class="chapter-item expanded"><a href=hck.html><strong aria-hidden=true>2.</strong> hck</a><li class="chapter-item expanded"><a href=sd.html><strong aria-hidden=true>3.</strong> sd</a><li class="chapter-item expanded"><a href=ripgrep/ripgrep.html><strong aria-hidden=true>4.</strong> ripgrep</a><li><ol class=section><li class="chapter-item expanded"><a href=ripgrep/options.html><strong aria-hidden=true>4.1.</strong> Options</a><li class="chapter-item expanded"><a href=ripgrep/pcre2.html><strong aria-hidden=true>4.2.</strong> PCRE2</a><li class="chapter-item expanded"><a href=ripgrep/multiple-files.html><strong aria-hidden=true>4.3.</strong> Multiple Files</a></ol><li class="chapter-item expanded"><a href=frawk/frawk.html><strong aria-hidden=true>5.</strong> frawk</a><li class="chapter-item expanded"><a href=huniq.html><strong aria-hidden=true>6.</strong> huniq</a><li class="chapter-item expanded"><a href=xsv.html class=active><strong aria-hidden=true>7.</strong> xsv</a><li class="chapter-item expanded"><a href=zet.html><strong aria-hidden=true>8.</strong> zet</a></li><br><hr><li class="chapter-item expanded"><i id=git-repository-button class="fa fa-github"></i><a href=https://github.com/learnbyexample/cli_text_processing_rust>   Source code</a><li class="chapter-item expanded"><i id=home-button class="fa fa-home"></i><a href=https://learnbyexample.github.io/>   My Blog</a><li class="chapter-item expanded"><i id=book-button class="fa fa-book"></i><a href=https://learnbyexample.github.io/books/>   My Books</a><li class="chapter-item expanded"><i id=mail-button class="fa fa-envelope"></i><a href=https://learnbyexample.gumroad.com/l/learnbyexample-weekly>   learnbyexample weekly</a></ol></div><div id=sidebar-resize-handle class=sidebar-resize-handle></div></nav><div id=page-wrapper class=page-wrapper><div class=page><div id=menu-bar-hover-placeholder></div><div id=menu-bar class="menu-bar sticky bordered"><div class=left-buttons><button id=sidebar-toggle class=icon-button type=button title="Toggle Table of Contents"aria-label="Toggle Table of Contents"aria-controls=sidebar><i class="fa fa-bars"></i></button><button id=theme-toggle class=icon-button type=button title="Change theme"aria-label="Change theme"aria-haspopup=true aria-expanded=false aria-controls=theme-list><i class="fa fa-paint-brush"></i></button><ul id=theme-list class=theme-popup aria-label=Themes role=menu><li role=none><button role=menuitem class=theme id=light>Light (default)</button><li role=none><button role=menuitem class=theme id=rust>Rust</button><li role=none><button role=menuitem class=theme id=coal>Coal</button><li role=none><button role=menuitem class=theme id=navy>Navy</button><li role=none><button role=menuitem class=theme id=ayu>Ayu</button></ul><button id=search-toggle class=icon-button type=button title="Search. (Shortkey: s)"aria-label="Toggle Searchbar"aria-expanded=false aria-keyshortcuts=S aria-controls=searchbar><i class="fa fa-search"></i></button></div><h1 class=menu-title>Command line text processing with Rust tools</h1><div class=right-buttons><a href=https://learnbyexample.github.io title=Blog aria-label=Blog> <i id=home-button class="fa fa-home"></i> </a><a href=https://github.com/learnbyexample/cli_text_processing_rust title="Git repository"aria-label="Git repository"> <i id=git-repository-button class="fa fa-github"></i> </a></div></div><div id=search-wrapper class=hidden><form id=searchbar-outer class=searchbar-outer><input type=search id=searchbar name=searchbar placeholder="Search this book ..."aria-controls=searchresults-outer aria-describedby=searchresults-header></form><div id=searchresults-outer class="searchresults-outer hidden"><div id=searchresults-header class=searchresults-header></div><ul id=searchresults></ul></div></div><script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script><div id=content class=content><main><div class=sidetoc><nav class=pagetoc></nav></div><p><br><br><p><img src=./images/warning.svg alt=warning> <img src=./images/warning.svg alt=warning> <img src=./images/warning.svg alt=warning> This is a <strong>work-in-progress</strong> draft version.<p><br><br><h1 id=xsv><a class=header href=#xsv>xsv</a></h1><p>From <a href=https://github.com/BurntSushi/xsv>github: xsv</a>:<blockquote><p>xsv is a command line program for indexing, slicing, analyzing, splitting and joining CSV files. Commands should be simple, fast and composable:<ol><li>Simple tasks should be easy.<li>Performance trade offs should be exposed in the CLI interface.<li>Composition should not come at the expense of performance.</ol></blockquote><h2 id=installation><a class=header href=#installation>Installation</a></h2><p>See <a href=https://github.com/BurntSushi/xsv#installation>xsv: installation</a> for details.<h2 id=commands-and-documentation><a class=header href=#commands-and-documentation>Commands and documentation</a></h2><p>From <code>xsv --help</code>:<pre><code class=language-nohighlight>$ xsv --help
+Usage:
+    xsv &LTcommand> [&LTargs>...]
+    xsv [options]
+
+Options:
+    --list        List all commands available.
+    -h, --help    Display this message
+    &LTcommand> -h  Display the command help message
+    --version     Print version info and exit
+
+Commands:
+    cat         Concatenate by row or column
+    count       Count records
+    fixlengths  Makes all records have same length
+    flatten     Show one field per line
+    fmt         Format CSV output (change field delimiter)
+    frequency   Show frequency tables
+    headers     Show header names
+    help        Show this usage message.
+    index       Create CSV index for faster access
+    input       Read CSV data with special quoting rules
+    join        Join CSV files
+    sample      Randomly sample CSV data
+    search      Search CSV data with regexes
+    select      Select columns from CSV
+    slice       Slice records from CSV
+    sort        Sort CSV data
+    split       Split CSV data into many files
+    stats       Compute basic statistics
+    table       Align CSV data into columns
+</code></pre><p>More description and examples can be found in the <a href=https://github.com/BurntSushi/xsv#available-commands>project's README</a>.<h2 id=header-based-filtering><a class=header href=#header-based-filtering>Header based filtering</a></h2><p>The <code>headers</code> command will list all the names of the columns, i.e. the first row elements. If you provide multiple input files, intersection of the headers will be shown.<pre><code class=language-bash>$ cat scores.csv
+Name,Maths,Physics,Chemistry
+Ith,100,100,100
+Cy,97,98,95
+Lin,78,83,80
+
+$ xsv headers scores.csv
+1   Name
+2   Maths
+3   Physics
+4   Chemistry
+</code></pre><p>You can use the <code>select</code> command to print only the required columns based on column number (starting from <code>1</code>) or header names.<pre><code class=language-bash># same as: xsv select 1,3 scores.csv
+$ xsv select Name,Physics scores.csv
+Name,Physics
+Ith,100
+Cy,98
+Lin,83
+
+# output order will be same as the select argument order
+$ xsv select Maths,Name scores.csv 
+Maths,Name
+100,Ith
+97,Cy
+78,Lin
+</code></pre><h2 id=pretty-printing><a class=header href=#pretty-printing>Pretty printing</a></h2><p>The <code>table</code> command will align the input data column wise.<pre><code class=language-bash># same as: column -ts, scores.csv
+$ xsv table scores.csv
+Name  Maths  Physics  Chemistry
+Ith   100    100      100
+Cy    97     98       95
+Lin   78     83       80
+
+# example with quoted fields
+$ cat quoted.csv 
+apple,"10,000",50
+fig,200,100
+$ xsv table quoted.csv
+apple  10,000  50
+fig    200     100
+</code></pre><p><br><br><br><p><em>More to come</em></main><nav class=nav-wrapper aria-label="Page navigation"><a rel=prev href=huniq.html class="mobile-nav-chapters previous"title="Previous chapter"aria-label="Previous chapter"aria-keyshortcuts=Left> <i class="fa fa-angle-left"></i> </a><a rel=next href=zet.html class="mobile-nav-chapters next"title="Next chapter"aria-label="Next chapter"aria-keyshortcuts=Right> <i class="fa fa-angle-right"></i> </a><div style="clear: both"></div></nav></div></div><nav class=nav-wide-wrapper aria-label="Page navigation"><a rel=prev href=huniq.html class="nav-chapters previous"title="Previous chapter"aria-label="Previous chapter"aria-keyshortcuts=Left> <i class="fa fa-angle-left"></i> </a><a rel=next href=zet.html class="nav-chapters next"title="Next chapter"aria-label="Next chapter"aria-keyshortcuts=Right> <i class="fa fa-angle-right"></i> </a></nav></div><script>
+            window.playground_copyable = true;
+        </script><script src=elasticlunr.min.js charset=utf-8></script><script src=mark.min.js charset=utf-8></script><script src=searcher.js charset=utf-8></script><script src=clipboard.min.js charset=utf-8></script><script src=highlight.js charset=utf-8></script><script src=book.js charset=utf-8></script><script src=sidebar.js></script>
