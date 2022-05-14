@@ -1,0 +1,99 @@
+<!DOCTYPE HTML><html lang=en class="sidebar-visible no-js light"><head><meta charset=UTF-8><title>htmlq - Command line text processing with Rust tools</title><meta content="text/html; charset=utf-8"http-equiv=Content-Type><meta name=description content="Command line text processing with Rust tools"><meta name=viewport content="width=device-width, initial-scale=1"><meta name=theme-color content=#ffffff><link rel=icon href=favicon.svg><link rel="shortcut icon"href=favicon.png><link rel=stylesheet href=css/variables.css><link rel=stylesheet href=css/general.css><link rel=stylesheet href=css/chrome.css><link rel=stylesheet href=FontAwesome/css/font-awesome.css><link rel=stylesheet href=fonts/fonts.css><link rel=stylesheet href=highlight.css><link rel=stylesheet href=tomorrow-night.css><link rel=stylesheet href=ayu-highlight.css><link rel=stylesheet href=style.css><body><script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script><script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script><script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script><script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script><nav id=sidebar class=sidebar aria-label="Table of contents"><div class=sidebar-scrollbox><ol class=chapter><li class="chapter-item expanded affix"><a href=preface.html>Preface</a><li class="chapter-item expanded"><a href=rust-regex.html><strong aria-hidden=true>1.</strong> Rust Regex</a><li class="chapter-item expanded"><a href=hck.html><strong aria-hidden=true>2.</strong> hck</a><li class="chapter-item expanded"><a href=sd.html><strong aria-hidden=true>3.</strong> sd</a><li class="chapter-item expanded"><a href=ripgrep/ripgrep.html><strong aria-hidden=true>4.</strong> ripgrep</a><li><ol class=section><li class="chapter-item expanded"><a href=ripgrep/options.html><strong aria-hidden=true>4.1.</strong> Options</a><li class="chapter-item expanded"><a href=ripgrep/pcre2.html><strong aria-hidden=true>4.2.</strong> PCRE2</a><li class="chapter-item expanded"><a href=ripgrep/multiple-files.html><strong aria-hidden=true>4.3.</strong> Multiple Files</a></ol><li class="chapter-item expanded"><a href=frawk/frawk.html><strong aria-hidden=true>5.</strong> frawk</a><li class="chapter-item expanded"><a href=huniq.html><strong aria-hidden=true>6.</strong> huniq</a><li class="chapter-item expanded"><a href=xsv.html><strong aria-hidden=true>7.</strong> xsv</a><li class="chapter-item expanded"><a href=zet.html><strong aria-hidden=true>8.</strong> zet</a><li class="chapter-item expanded"><a href=htmlq.html class=active><strong aria-hidden=true>9.</strong> htmlq</a></li><br><hr><li class="chapter-item expanded"><i id=git-repository-button class="fa fa-github"></i><a href=https://github.com/learnbyexample/cli_text_processing_rust>   Source code</a><li class="chapter-item expanded"><i id=home-button class="fa fa-home"></i><a href=https://learnbyexample.github.io/>   My Blog</a><li class="chapter-item expanded"><i id=book-button class="fa fa-book"></i><a href=https://learnbyexample.github.io/books/>   My Books</a><li class="chapter-item expanded"><i id=mail-button class="fa fa-envelope"></i><a href=https://learnbyexample.gumroad.com/l/learnbyexample-weekly>   learnbyexample weekly</a></ol></div><div id=sidebar-resize-handle class=sidebar-resize-handle></div></nav><div id=page-wrapper class=page-wrapper><div class=page><div id=menu-bar-hover-placeholder></div><div id=menu-bar class="menu-bar sticky bordered"><div class=left-buttons><button id=sidebar-toggle class=icon-button type=button title="Toggle Table of Contents"aria-label="Toggle Table of Contents"aria-controls=sidebar><i class="fa fa-bars"></i></button><button id=theme-toggle class=icon-button type=button title="Change theme"aria-label="Change theme"aria-haspopup=true aria-expanded=false aria-controls=theme-list><i class="fa fa-paint-brush"></i></button><ul id=theme-list class=theme-popup aria-label=Themes role=menu><li role=none><button role=menuitem class=theme id=light>Light (default)</button><li role=none><button role=menuitem class=theme id=rust>Rust</button><li role=none><button role=menuitem class=theme id=coal>Coal</button><li role=none><button role=menuitem class=theme id=navy>Navy</button><li role=none><button role=menuitem class=theme id=ayu>Ayu</button></ul><button id=search-toggle class=icon-button type=button title="Search. (Shortkey: s)"aria-label="Toggle Searchbar"aria-expanded=false aria-keyshortcuts=S aria-controls=searchbar><i class="fa fa-search"></i></button></div><h1 class=menu-title>Command line text processing with Rust tools</h1><div class=right-buttons><a href=https://learnbyexample.github.io title=Blog aria-label=Blog> <i id=home-button class="fa fa-home"></i> </a><a href=https://github.com/learnbyexample/cli_text_processing_rust title="Git repository"aria-label="Git repository"> <i id=git-repository-button class="fa fa-github"></i> </a></div></div><div id=search-wrapper class=hidden><form id=searchbar-outer class=searchbar-outer><input type=search id=searchbar name=searchbar placeholder="Search this book ..."aria-controls=searchresults-outer aria-describedby=searchresults-header></form><div id=searchresults-outer class="searchresults-outer hidden"><div id=searchresults-header class=searchresults-header></div><ul id=searchresults></ul></div></div><script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script><div id=content class=content><main><div class=sidetoc><nav class=pagetoc></nav></div><p><br><br><p><img src=./images/warning.svg alt=warning> <img src=./images/warning.svg alt=warning> <img src=./images/warning.svg alt=warning> This is a <strong>work-in-progress</strong> draft version.<p><br><br><h1 id=htmlq><a class=header href=#htmlq>htmlq</a></h1><p>From <a href=https://github.com/mgdm/htmlq>htmlq</a><blockquote><p>Like <code>jq</code>, but for HTML. Uses <a href=https://developer.mozilla.org/en-US/docs/Learn/CSS/Introduction_to_CSS/Selectors>CSS selectors</a> to extract bits of content from HTML files.</blockquote><h2 id=installation><a class=header href=#installation>Installation</a></h2><p>See <a href=https://github.com/mgdm/htmlq#installation>htmlq: installation</a> for details.<h2 id=documentation><a class=header href=#documentation>Documentation</a></h2><p>From <code>htmlq --help</code>:<pre><code class=language-bash>$ htmlq --help
+htmlq 0.4.0
+Michael Maclean &LTmichael@mgdm.net>
+Runs CSS selectors on HTML
+
+USAGE:
+    htmlq [FLAGS] [OPTIONS] [--] [selector]...
+
+FLAGS:
+    -B, --detect-base          Try to detect the base URL from the &LTbase> tag in the document. If not found, default to
+                               the value of --base, if supplied
+    -h, --help                 Prints help information
+    -w, --ignore-whitespace    When printing text nodes, ignore those that consist entirely of whitespace
+    -p, --pretty               Pretty-print the serialised output
+    -t, --text                 Output only the contents of text nodes inside selected elements
+    -V, --version              Prints version information
+
+OPTIONS:
+    -a, --attribute &LTattribute>         Only return this attribute (if present) from selected elements
+    -b, --base &LTbase>                   Use this URL as the base for links
+    -f, --filename &LTFILE>               The input file. Defaults to stdin
+    -o, --output &LTFILE>                 The output file. Defaults to stdout
+    -r, --remove-nodes &LTSELECTOR>...    Remove nodes matching this expression before output. May be specified multiple
+                                        times
+
+ARGS:
+    &LTselector>...    The CSS expression to select [default: html]
+</code></pre><h2 id=examples><a class=header href=#examples>Examples</a></h2><p>Consider the following <code>sample.html</code> input file:<pre><code class=language-html>&LThtml>
+    &LThead> &LTtitle>Sample HTML&LT/title> &LT/head>
+    &LTbody>
+        &LTp>Fantasy books:&LT/p>
+        &LTli>Harry Potter&LT/li>
+        &LTli>Cradle&LT/li>
+        &LTli>The Stormlight Archive&LT/li>
+        &LTa href="https://learnbyexample.github.io/">blog link&LT/a>
+    &LT/body>
+&LT/html>
+</code></pre><p>The <code>--text</code> option will show the text part of selected elements, which is entire document by default. The <code>-f</code> option helps to specify the input file, which is <code>stdin</code> data by default. The <code>-w</code> option helps to ignore text nodes having only whitespace.<pre><code class=language-bash>$ htmlq -w --text -f sample.html
+Sample HTML
+Fantasy books:
+Harry Potter
+Cradle
+The Stormlight Archive
+blog link
+
+</code></pre><p>To select specific elements, provide that as an argument:<pre><code class=language-bash>$ htmlq 'li' -f sample.html
+&LTli>Harry Potter&LT/li>
+&LTli>Cradle&LT/li>
+&LTli>The Stormlight Archive&LT/li>
+
+$ htmlq --text 'li' -f sample.html
+Harry Potter
+Cradle
+The Stormlight Archive
+</code></pre><p>The <code>-a</code> option helps to get an attribute's value from the selected elements:<pre><code class=language-bash>$ htmlq -a href 'a' -f sample.html
+https://learnbyexample.github.io/
+</code></pre><p>The <a href=https://github.com/mgdm/htmlq#examples>project's README</a> also includes example use cases.<p><br><br><br><p><em>More to come</em></main><nav class=nav-wrapper aria-label="Page navigation"><a rel=prev href=zet.html class="mobile-nav-chapters previous"title="Previous chapter"aria-label="Previous chapter"aria-keyshortcuts=Left> <i class="fa fa-angle-left"></i> </a><div style="clear: both"></div></nav></div></div><nav class=nav-wide-wrapper aria-label="Page navigation"><a rel=prev href=zet.html class="nav-chapters previous"title="Previous chapter"aria-label="Previous chapter"aria-keyshortcuts=Left> <i class="fa fa-angle-left"></i> </a></nav></div><script>
+            window.playground_copyable = true;
+        </script><script src=elasticlunr.min.js charset=utf-8></script><script src=mark.min.js charset=utf-8></script><script src=searcher.js charset=utf-8></script><script src=clipboard.min.js charset=utf-8></script><script src=highlight.js charset=utf-8></script><script src=book.js charset=utf-8></script><script src=sidebar.js></script>
