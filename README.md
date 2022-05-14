@@ -26,11 +26,12 @@ For web version of the book, visit https://learnbyexample.github.io/cli_text_pro
 * [bat](https://github.com/sharkdp/bat) — for options like `-A`, `-n`, etc
 * [jql](https://github.com/yamafaktory/jql)
 * [xsv](https://github.com/BurntSushi/xsv)
+* [zet](https://github.com/yarrow/zet)
+* [htmlq](https://github.com/mgdm/htmlq)
+* [rq](https://github.com/dflemstr/rq)
 * Et cetera
 
-:information_source: [Rust rewrite of the GNU coreutils](https://github.com/uutils/coreutils) won't be covered here. I'm planning to write a separate book for GNU coreutils.
-
-See also: [Awesome Alternatives in Rust](https://github.com/TaKO8Ki/awesome-alternatives-in-rust)
+:information_source: [Rust coreutils](https://github.com/uutils/coreutils) won't be covered here. See also [Awesome Alternatives in Rust](https://github.com/TaKO8Ki/awesome-alternatives-in-rust).
 
 <br>
 
